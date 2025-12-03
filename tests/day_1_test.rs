@@ -4,7 +4,12 @@ use advent_of_code_2025::{day_1};
 
 #[test]
 fn it_works() {
-    let contents = read_to_string("tests/data/day_1.txt").expect("Should have been able to read the file");
+    //let contents = read_to_string("tests/data/day_1.txt").expect("Should have been able to read the file");
+
+    // 50 -> 99 -> 1 -> 0
+    let contents = "R49
+R2
+L201";
     let result = day_1(contents);
-    assert_eq!(999999, 0);
+    assert_eq!(result, 4);
 }
