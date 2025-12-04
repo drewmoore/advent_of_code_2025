@@ -1,8 +1,7 @@
+use std::fs::{read_to_string};
+
 use advent_of_code_2025::{day_1};
 
-// TODO: meet requirements: the number of times the dial is left pointing at 0 after any rotation in the sequence
-//       NOT number of traversals... read the instructions !
-// TODO: R + L are flipped, turning right decreases numbers...
 #[test]
 fn it_works() {
     // 50 -> 9 -> 19 -> 37 -> 15 -> 98 -> 0 -> 0 -> 0
@@ -18,4 +17,10 @@ R300";
     assert_eq!(result, 3);
 }
 
-// Answer is 1011
+#[test]
+fn it_solves_the_puzzle() {
+    let contents = read_to_string("tests/data/day_1.txt").expect("Should have been able to read the file");
+    let result = day_1(&contents);
+
+    assert_eq!(result, 1011);
+}
