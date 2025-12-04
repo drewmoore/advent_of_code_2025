@@ -38,3 +38,57 @@ pub fn day_1(input: &str) -> u32 {
 
     landings_on_zero_count
 }
+
+pub fn day_2(input: &str) -> u32 {
+    let mut landings_on_zero_count = 0;
+    let mut position: i32 = 50;
+    let matcher = Regex::new(r"^([R|L])(\d+)").unwrap();
+
+    for instruction in input.lines() {
+        let caps = matcher.captures(instruction).unwrap();
+        let direction = &caps[1];
+        let mut steps_count: i32 = caps[2].parse().unwrap();
+
+        //if direction == 'R'.to_string() {
+        // Example given seems opposite direction...
+        if direction == 'L'.to_string() {
+            steps_count = -steps_count
+        }
+
+        let unrefined_position = position as i32 + steps_count;
+
+        let divided_position: f64 = unrefined_position as f64 / 100.0;
+        let mut traversals_of_zero_count = divided_position.abs() as u32;
+
+        if unrefined_position < 0 {
+            if traversals_of_zero_count == 0 && position > 0 {
+                traversals_of_zero_count += 1
+            }
+
+            position = unrefined_position
+                + (100
+                    * (if traversals_of_zero_count > 0 {
+                        traversals_of_zero_count
+                    } else {
+                        1
+                    })) as i32;
+
+        } else {
+            position = unrefined_position % 100;
+        }
+
+        if position == 0 {
+            landings_on_zero_count += 1;
+
+            if traversals_of_zero_count > 0 {
+                landings_on_zero_count += traversals_of_zero_count as u32 - 1;
+            }
+        } else {
+            landings_on_zero_count += traversals_of_zero_count;
+        }
+
+        //println!("hello {instruction} | {position} | {unrefined_position} | {divided_position} | {traversals_of_zero_count} | {landings_on_zero_count}")
+    }
+
+    landings_on_zero_count
+}
