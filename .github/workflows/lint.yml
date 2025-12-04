@@ -13,6 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: cargo lint
-        run:
-          - rustup component add clippy
-          - cargo clippy -p advent_of_code_2025 -- -D warnings
+        run: |
+          rustup component add clippy
+          cargo clippy -p advent_of_code_2025 -- -D warnings
