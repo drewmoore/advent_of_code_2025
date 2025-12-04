@@ -20,13 +20,19 @@ pub fn day_1(input: &str) -> u32 {
             let divided_position: f64 = unrefined_position as f64 / 100.0;
             let traversals_of_zero_count = divided_position.abs() as i32;
 
-            position = unrefined_position + (100 * (if traversals_of_zero_count > 0 {traversals_of_zero_count} else {1}));
+            position = unrefined_position
+                + (100
+                    * (if traversals_of_zero_count > 0 {
+                        traversals_of_zero_count
+                    } else {
+                        1
+                    }));
         } else {
             position = unrefined_position % 100;
         }
 
         if position == 0 {
-          landings_on_zero_count += 1;
+            landings_on_zero_count += 1;
         }
     }
 
